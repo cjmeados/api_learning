@@ -12,12 +12,51 @@ app.get('/users', (req, res) => {
     const name = req.query.name;
     const age = req.query.age;
 
-    res.json({
+    res.status(200).json({
         message: `Hello ${name}, you are ${age} years old!`
     });
 });
 
+app.get('/search', (req, res) =>  {
+    const q = req.query.q;
+    const limit = req.query.limit;
+
+    res.status(200).json({query: `${q}`, limit: `${limit}`});
+});
+
+app.get('/divide', (req, res, next) => {
+    const a = Number(req.query.a);
+    const b = Number(req.query.b);
+
+    if (Number.isNaN(a) || Number.isNaN(b)) {
+        return next({status: 400, message: 'a and b must be numbers.'});
+    }
+
+    if (b == 0) {
+        return next({status: 400, message: 'Can\'t divide by zero.'});
+    }
+
+    const result = a/b;
+
+    res.status(200).json({result});
+
+});
+
+//error handle
+app.use((err, req, res, next) => {
+    const status = err.status || 500;
+    const message = err.message || 'Something went wrong.';
+
+    res.status(status).json({message});
+})
+
+
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
+
+// make note that status codes have to be sent, 500 errors generally with try catch
+// 400 with if/then
+
+
 
