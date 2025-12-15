@@ -42,6 +42,10 @@ app.get('/divide', (req, res, next) => {
 
 });
 
+const greetController = require('./controllers/greetController.js');
+
+app.get('/greet', greetController);
+
 //error handle
 app.use((err, req, res, next) => {
 
