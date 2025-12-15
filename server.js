@@ -44,6 +44,9 @@ app.get('/divide', (req, res, next) => {
 
 //error handle
 app.use((err, req, res, next) => {
+
+    console.log('Error triggered');
+
     const status = err.status || 500;
     const message = err.message || 'Something went wrong.';
 
