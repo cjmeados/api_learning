@@ -17,4 +17,4 @@ function greetController(req, res, next) {
     }
 }
 
-module.exports = greetcontroller;
+module.exports = greetController;
