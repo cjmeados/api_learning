@@ -2,7 +2,11 @@ const express = require('express');
 const app = express();
 const PORT = 5500;
 
+app.use(express.static("public")); // look into this more
+
 app.use(express.json());
+
+
 
 app.get('/hello', (req, res) =>  {
     res.status(200).json({ message: 'Hello, world!' });

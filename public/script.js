@@ -1,4 +1,4 @@
-let apiBtn = document.getElementById('apiBtn');
+let apiBtn = document.getElementById('fetchBtn');
 let landingOutput = document.getElementById('landingOutput');
 
 apiBtn.addEventListener('click', async () => { //look into async more later
