@@ -10,7 +10,16 @@ apiBtn.addEventListener('click', async () => { //look into async more later
 
     landingOutput.textContent = data.message;
 
+});
 
+let weatherBtn = document.getElementById('weatherBtn');
+let weatherOutput = document.getElementById('weatherOutput');
 
+weatherBtn.addEventListener('click', async () => {
+    const response = await fetch('/external');
+    
+    const data = await response.json();
 
+    const temps = data.hourly.temperature_2m.slice(0,24).join(', ');
+    weatherOutput.textContent = `${temps}`;
 });

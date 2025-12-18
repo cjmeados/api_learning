@@ -6,8 +6,6 @@ app.use(express.static("public")); // look into this more
 
 app.use(express.json());
 
-
-
 app.get('/hello', (req, res) =>  {
     res.status(200).json({ message: 'Hello, world!' });
 });
@@ -68,6 +66,27 @@ app.listen(PORT, () => {
 
 // make note that status codes have to be sent, 500 errors generally with try catch
 // 400 with if/then
+
+app.get('/external', async (req, res) => {
+    const city = req.query.city || 'London';
+    
+    const latitude = 51.5072;
+    const longitude = -0.1276;
+
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m`;
+
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        res.json(data);
+
+    } catch (err) {
+        console.error(err); // maybe unnecessary?
+        res.status(500).json({message: 'Failed to reach server'});
+    }
+
+});
 
 
 
